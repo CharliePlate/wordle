@@ -4,14 +4,21 @@ import GameBoardRow from './GameBoardRow';
 
 type Props = {};
 
-const App = (props: Props) => {
+const Gameboard = (props: Props) => {
+	// Props
+	const {} = props;
+
+	// Hooks
 	const [arr, setArr] = useState([
 		['', '', '', '', ''],
 		['', '', '', '', ''],
 		['', '', '', '', ''],
 		['', '', '', '', ''],
 		['', '', '', '', ''],
+		['', '', '', '', ''],
 	] as string[][]);
+
+	const { row } = useStore();
 
 	const handleWord = useCallback(
 		(row: number, position: number, val: string) => {
@@ -24,7 +31,7 @@ const App = (props: Props) => {
 		[]
 	);
 
-	const { row } = useStore();
+	// Component
 
 	return (
 		<>
@@ -39,4 +46,4 @@ const App = (props: Props) => {
 	);
 };
 
-export default App;
+export default Gameboard;

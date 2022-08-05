@@ -10,8 +10,13 @@ type Props = {
 };
 
 const GameBoardItem = memo((props: Props) => {
+	// Props
+	const {} = props;
+
+	// Hooks
 	const { row } = useStore();
 
+	// Component
 	return (
 		<Box
 			sx={{

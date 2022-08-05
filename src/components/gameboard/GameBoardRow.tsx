@@ -11,16 +11,25 @@ type Props = {
 };
 
 const GameBoardRow = (props: Props) => {
-	useKeyPress([], (k) => alert(k));
-	const { row } = useStore();
+	// Props
+	const { word, handleWord, active } = props;
 
+	// Hooks
+	useKeyPress([], (k) => {
+		if (active) {
+			alert(k);
+		}
+		return;
+	});
+
+	// Component
 	return (
 		<Center>
 			<Group sx={{ padding: 2 }}>
-				{props.word.map((val, idx) => (
+				{word.map((val, idx) => (
 					<GameBoardItem
 						pos={idx}
-						handleWord={props.handleWord}
+						handleWord={handleWord}
 						letter={val}
 					/>
 				))}
