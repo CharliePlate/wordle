@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import useStore from '../../store';
+import ActiveGameBoardRow from './ActiveGameBoardRow';
 import GameBoardRow from './GameBoardRow';
 
 type Props = {};
@@ -35,13 +36,17 @@ const Gameboard = (props: Props) => {
 
 	return (
 		<>
-			{arr.map((x, idx) => (
-				<GameBoardRow
-					word={x}
-					active={idx === row}
-					handleWord={handleWord}
-				/>
-			))}
+			{arr.map((x, idx) =>
+				idx === row ? (
+					<ActiveGameBoardRow
+						handleWord={handleWord}
+						word={x}
+						key={idx}
+					/>
+				) : (
+					<GameBoardRow word={x} key={idx} />
+				)
+			)}
 		</>
 	);
 };

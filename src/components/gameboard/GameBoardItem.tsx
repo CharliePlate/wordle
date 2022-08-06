@@ -1,32 +1,48 @@
 import { Box } from '@mantine/core';
-import React, { memo, useEffect } from 'react';
-import useKeyPress from '../../hooks/useKeyPress';
+import React, { memo } from 'react';
 import useStore from '../../store';
 
 type Props = {
-	letter: string;
-	pos: number;
-	handleWord: (rowNum: number, position: number, val: string) => void;
+	letter?: string;
+	pos?: number;
+	status?: string;
 };
 
 const GameBoardItem = memo((props: Props) => {
 	// Props
-	const {} = props;
+	const { letter, pos, status } = props;
 
 	// Hooks
 	const { row } = useStore();
 
 	// Component
-	return (
+	return status ? (
 		<Box
 			sx={{
+				backgroundColor: 'hsla(111, 0%, 77%, 1)',
 				height: 75,
 				width: 75,
-				backgroundColor: 'blue',
-				border: '4px solid black',
+				border: `${
+					status === 'typing' ? '5px dashed black' : '2px solid black'
+				}`,
+				borderRadius: `${status === 'typing' ? '5px' : '0px'}`,
+				fontSize: 50,
+				color: 'black',
 			}}
-			onClick={() => {
-				props.handleWord(row, props.pos, 'a');
+			key={props.pos}
+		>
+			{props.letter}
+		</Box>
+	) : (
+		<Box
+			sx={{
+				backgroundColor: 'hsla(111, 0%, 77%, 1)',
+				height: 75,
+				width: 75,
+				border: '2px solid black',
+				borderRadius: '0',
+				fontSize: 50,
+				color: 'black',
 			}}
 		>
 			{props.letter}
