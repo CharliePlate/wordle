@@ -1,6 +1,6 @@
 interface ColCounter {
-	col: number;
+	counter: number;
 	increment: () => void;
 	decrement: () => void;
-	setCounterValue: (val: number) => void;
+	setCounter: (val: number) => void;
 }

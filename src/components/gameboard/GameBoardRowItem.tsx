@@ -1,6 +1,6 @@
 import { Box } from '@mantine/core';
 import React, { memo } from 'react';
-import useStore from '../../store';
+import useStore from '../../lib/store';
 
 type Props = {
 	letter?: string;

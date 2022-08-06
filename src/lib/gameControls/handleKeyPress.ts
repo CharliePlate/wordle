@@ -3,16 +3,16 @@ const handleKeyPress = (
 	keyPress: string,
 	val: string[]
 ): void => {
-	const { col, decrement, increment } = colCounter;
+	const { counter, decrement, increment } = colCounter;
 	if (keyPress === 'Backspace') {
-		if (col === 0 || val[col] !== '') {
+		if (counter === 0 || val[counter] !== '') {
 			return;
 		} else {
 			colCounter.decrement();
 			return;
 		}
 	} else {
-		if (col === 4) {
+		if (counter === 4) {
 			return;
 		} else {
 			colCounter.increment();

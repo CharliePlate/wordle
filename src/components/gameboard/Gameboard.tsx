@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import useStore from '../../store';
+import useWordArray from '../../hooks/useWordArray';
+import useStore from '../../lib/store';
 import GameBoardRow from './GameBoardRow';
 import GameBoardRowActive from './GameBoardRowActive';
 
@@ -10,27 +11,8 @@ const Gameboard = (props: Props) => {
 	const {} = props;
 
 	// Hooks
-	const [arr, setArr] = useState([
-		['', '', '', '', ''],
-		['', '', '', '', ''],
-		['', '', '', '', ''],
-		['', '', '', '', ''],
-		['', '', '', '', ''],
-		['', '', '', '', ''],
-	] as string[][]);
-
 	const { row } = useStore();
-
-	const handleWord = useCallback(
-		(row: number, position: number, val: string) => {
-			setArr((arr: string[][]) => {
-				const newArr = [...arr];
-				newArr[row][position] = val;
-				return newArr;
-			});
-		},
-		[]
-	);
+	const { arr, updateWord } = useWordArray();
 
 	// Component
 
@@ -39,7 +21,7 @@ const Gameboard = (props: Props) => {
 			{arr.map((x, idx) =>
 				idx === row ? (
 					<GameBoardRowActive
-						handleWord={handleWord}
+						handleWord={updateWord}
 						word={x}
 						key={idx}
 					/>

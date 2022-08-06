@@ -1,8 +1,9 @@
 import { Box, Center, Group } from '@mantine/core';
 import React from 'react';
-import useColCounter from '../../hooks/useColCounter';
+import useColCounter from '../../hooks/useCounter';
 import useKeyPress from '../../hooks/useKeyPress';
 import handleKeyPress from '../../lib/gameControls/handleKeyPress';
+import useStore from '../../lib/store';
 import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
@@ -17,9 +18,12 @@ const GameBoardRowActive = (props: Props) => {
 	const { word, handleWord } = props;
 
 	// Hooks
+	const { row } = useStore();
 	const colCounter = useColCounter();
+	const { counter, setCounter } = colCounter;
 	useKeyPress([...availableLetters.split(''), 'Backspace'], (k) => {
 		handleKeyPress(colCounter, k, word);
+		handleWord(row, counter, k);
 	});
 
 	// Component
@@ -29,11 +33,11 @@ const GameBoardRowActive = (props: Props) => {
 				{word.map((val, idx) => (
 					<Box>
 						<GameBoardItem
-							status={colCounter.col === idx ? 'typing' : 'undef'}
+							status={counter === idx ? 'typing' : 'undef'}
 							letter={val}
 							pos={idx}
 							key={idx}
-							onClick={colCounter.setCounterValue}
+							onClick={setCounter}
 						/>
 					</Box>
 				))}
