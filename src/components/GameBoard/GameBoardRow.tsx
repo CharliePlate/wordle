@@ -9,7 +9,7 @@ type Props = {
 const GameBoardRow = memo((props: Props) => {
 	// Props
 	const { word } = props;
-	console.log('rerender');
+
 	// Component
 	return (
 		<Center>
