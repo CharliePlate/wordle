@@ -12,7 +12,7 @@ type Props = {
 
 const availableLetters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-const ActiveGameBoardRow = (props: Props) => {
+const GameBoardRowActive = (props: Props) => {
 	// Props
 	const { word, handleWord } = props;
 
@@ -42,4 +42,4 @@ const ActiveGameBoardRow = (props: Props) => {
 	);
 };
 
-export default ActiveGameBoardRow;
+export default GameBoardRowActive;
