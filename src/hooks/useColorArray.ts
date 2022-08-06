@@ -12,10 +12,18 @@ const useColorArray = () => {
 
 	const updateColors = (ans: string, guess: string[], row: number): void => {
 		const ansArr = ans.split('');
-		const newArr = guess.map((letter, idx) => {
+
+		const correctArr = guess.map((_, idx) => {
 			if (guess[idx] === ansArr[idx]) {
 				ansArr[idx] = '';
 				return 'correct';
+			}
+			return '';
+		});
+
+		const newArr = guess.map((letter, idx) => {
+			if (correctArr[idx]) {
+				return correctArr[idx];
 			} else if (ansArr.includes(letter)) {
 				ansArr[idx] = '';
 				return 'present';

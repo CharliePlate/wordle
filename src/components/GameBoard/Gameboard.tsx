@@ -14,7 +14,7 @@ const Gameboard = (props: Props) => {
 	// Props
 
 	// Hooks
-	const [ans, setAns] = useState('SNAKE');
+	const [ans, setAns] = useState('CLEAN');
 	const { row, incrementRow } = useStore();
 	const { colorArr, updateColors } = useColorArray();
 	const { arr, updateWord } = useWordArray();
@@ -38,7 +38,7 @@ const Gameboard = (props: Props) => {
 						key={idx}
 					/>
 				) : (
-					<GameBoardRow word={x} key={idx} />
+					<GameBoardRow colorArr={colorArr[idx]} word={x} key={idx} />
 				)
 			)}
 			<Button onClick={() => incrementRow()}>Increment Row</Button>

@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 type Props = {
 	letter?: string;
 	pos?: number;
-	status?: string;
+	status: string;
 	onClick?: (pos: number) => void;
 };
 
@@ -13,7 +13,7 @@ const GameBoardItem = memo((props: Props) => {
 	const { letter, pos, status, onClick } = props;
 
 	// Component
-	return status ? (
+	return status === 'typing' || status === 'undef' ? (
 		<Box
 			sx={{
 				display: 'flex',
@@ -37,7 +37,13 @@ const GameBoardItem = memo((props: Props) => {
 	) : (
 		<Box
 			sx={{
-				backgroundColor: 'hsla(111, 0%, 77%, 1)',
+				backgroundColor: `${
+					{
+						correct: 'green',
+						wrong: 'hsla(111, 0%, 90%, 1)',
+						present: 'orange',
+					}[status] || 'hsla(111, 0%, 77%, 1)'
+				}`,
 				display: 'flex',
 				justifyContent: 'center',
 				alignContent: 'center',
