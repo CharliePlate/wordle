@@ -1,5 +1,5 @@
 import React from 'react';
-import Gameboard from './components/gameboard/Gameboard';
+import Gameboard from './components/GameBoard/Gameboard';
 
 type Props = {};
 
