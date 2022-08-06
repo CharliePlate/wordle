@@ -6,11 +6,12 @@ type Props = {
 	letter?: string;
 	pos?: number;
 	status?: string;
+	onClick?: (pos: number) => void;
 };
 
 const GameBoardItem = memo((props: Props) => {
 	// Props
-	const { letter, pos, status } = props;
+	const { letter, pos, status, onClick } = props;
 
 	// Hooks
 	const { row } = useStore();
@@ -29,7 +30,8 @@ const GameBoardItem = memo((props: Props) => {
 				fontSize: 50,
 				color: 'black',
 			}}
-			key={props.pos}
+			key={pos}
+			onClick={() => onClick!(pos!)}
 		>
 			{props.letter}
 		</Box>

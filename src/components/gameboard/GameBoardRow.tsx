@@ -1,6 +1,6 @@
 import { Center, Group } from '@mantine/core';
 import React from 'react';
-import GameBoardItem from './GameBoardItem';
+import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
 	word: string[];
