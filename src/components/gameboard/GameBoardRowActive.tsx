@@ -21,10 +21,13 @@ const GameBoardRowActive = (props: Props) => {
 	const { row } = useStore();
 	const colCounter = useColCounter();
 	const { counter, setCounter } = colCounter;
-	useKeyPress([...availableLetters.split(''), 'Backspace'], (k) => {
-		handleKeyPress(colCounter, k, word);
-		handleWord(row, counter, k);
-	});
+	useKeyPress(
+		[...availableLetters.split(''), 'Backspace', 'ArrowLeft', 'ArrowRight'],
+		(k) => {
+			handleKeyPress(colCounter, k, word);
+			handleWord(row, counter, k);
+		}
+	);
 
 	// Component
 	return (

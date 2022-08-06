@@ -17,7 +17,10 @@ const useWordArray = () => {
 				newArr[row][pos] = '';
 				return newArr;
 			}
-			newArr[row][pos] = val;
+			if (val.length > 1) {
+				return newArr;
+			}
+			newArr[row][pos] = val.toUpperCase();
 			return newArr;
 		});
 	}, []);

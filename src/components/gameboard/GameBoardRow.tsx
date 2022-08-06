@@ -1,17 +1,15 @@
 import { Center, Group } from '@mantine/core';
-import React from 'react';
+import React, { memo } from 'react';
 import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
 	word: string[];
 };
 
-const GameBoardRow = (props: Props) => {
+const GameBoardRow = memo((props: Props) => {
 	// Props
 	const { word } = props;
-
-	// Hooks
-
+	console.log('rerender');
 	// Component
 	return (
 		<Center>
@@ -22,6 +20,6 @@ const GameBoardRow = (props: Props) => {
 			</Group>
 		</Center>
 	);
-};
+});
 
 export default GameBoardRow;

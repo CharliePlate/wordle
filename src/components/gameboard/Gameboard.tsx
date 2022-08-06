@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import { Button } from '@mantine/core';
+import React from 'react';
 import useWordArray from '../../hooks/useWordArray';
 import useStore from '../../lib/store';
 import GameBoardRow from './GameBoardRow';
@@ -8,10 +9,9 @@ type Props = {};
 
 const Gameboard = (props: Props) => {
 	// Props
-	const {} = props;
 
 	// Hooks
-	const { row } = useStore();
+	const { row, incrementRow } = useStore();
 	const { arr, updateWord } = useWordArray();
 
 	// Component
@@ -29,6 +29,7 @@ const Gameboard = (props: Props) => {
 					<GameBoardRow word={x} key={idx} />
 				)
 			)}
+			<Button onClick={() => incrementRow()}>Increment Row</Button>
 		</>
 	);
 };

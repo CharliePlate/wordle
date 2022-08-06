@@ -1,6 +1,5 @@
 import { Box } from '@mantine/core';
 import React, { memo } from 'react';
-import useStore from '../../lib/store';
 
 type Props = {
 	letter?: string;
@@ -13,13 +12,13 @@ const GameBoardItem = memo((props: Props) => {
 	// Props
 	const { letter, pos, status, onClick } = props;
 
-	// Hooks
-	const { row } = useStore();
-
 	// Component
 	return status ? (
 		<Box
 			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignContent: 'center',
 				backgroundColor: 'hsla(111, 0%, 77%, 1)',
 				height: 75,
 				width: 75,
@@ -33,12 +32,15 @@ const GameBoardItem = memo((props: Props) => {
 			key={pos}
 			onClick={() => onClick!(pos!)}
 		>
-			{props.letter}
+			{letter}
 		</Box>
 	) : (
 		<Box
 			sx={{
 				backgroundColor: 'hsla(111, 0%, 77%, 1)',
+				display: 'flex',
+				justifyContent: 'center',
+				alignContent: 'center',
 				height: 75,
 				width: 75,
 				border: '2px solid black',
@@ -47,7 +49,7 @@ const GameBoardItem = memo((props: Props) => {
 				color: 'black',
 			}}
 		>
-			{props.letter}
+			{letter}
 		</Box>
 	);
 });
