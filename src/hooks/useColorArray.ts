@@ -22,10 +22,12 @@ const useColorArray = () => {
 		});
 
 		const newArr = guess.map((letter, idx) => {
+			console.log(ansArr);
 			if (correctArr[idx]) {
+				console.log('here');
 				return correctArr[idx];
 			} else if (ansArr.includes(letter)) {
-				ansArr[idx] = '';
+				ansArr[ansArr.indexOf(letter)] = '';
 				return 'present';
 			} else {
 				return 'wrong';

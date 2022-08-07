@@ -12,12 +12,12 @@ type Props = {};
 
 const Gameboard = (props: Props) => {
 	// Props
-
 	// Hooks
 	const [ans, setAns] = useState('CLEAN');
 	const { row, incrementRow } = useStore();
 	const { colorArr, updateColors } = useColorArray();
 	const { arr, updateWord } = useWordArray();
+
 	useKeyPress(['Enter'], (k) => {
 		const res = isValidWord(arr[row]);
 		if (res === 'valid') {
@@ -27,7 +27,6 @@ const Gameboard = (props: Props) => {
 	});
 
 	// Component
-
 	return (
 		<>
 			{arr.map((x, idx) =>
