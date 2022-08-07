@@ -1,6 +1,6 @@
 import { Set } from 'typescript';
 
-const ansList: Set<string> = new Set([
+const ansArr = new Set([
 	'aback',
 	'abase',
 	'abate',
@@ -15289,4 +15289,9 @@ const allWords: Set<string> = new Set([
 	'times',
 ]);
 
-export { allWords, ansList };
+const generateRandomWord = (): string => {
+	const array: string[] = Array.from(ansArr);
+	return array[Math.floor(Math.random() * array.length)];
+};
+
+export { allWords, ansArr, generateRandomWord };

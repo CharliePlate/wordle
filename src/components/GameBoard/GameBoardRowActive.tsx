@@ -34,15 +34,13 @@ const GameBoardRowActive = (props: Props) => {
 		<Center>
 			<Group sx={{ padding: 1, gap: '2px' }}>
 				{word.map((val, idx) => (
-					<Box>
-						<GameBoardItem
-							status={counter === idx ? 'typing' : 'undef'}
-							letter={val}
-							pos={idx}
-							key={idx}
-							onClick={setCounter}
-						/>
-					</Box>
+					<GameBoardItem
+						status={counter === idx ? 'typing' : 'undef'}
+						letter={val}
+						pos={idx}
+						key={idx}
+						onClick={setCounter}
+					/>
 				))}
 			</Group>
 		</Center>

@@ -1,15 +1,17 @@
-import { Center, Group } from '@mantine/core';
+import { Box, Center, Group } from '@mantine/core';
+import { motion } from 'framer-motion';
 import React, { memo } from 'react';
 import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
 	word: string[];
 	colorArr: string[];
+	animating?: boolean;
 };
 
 const GameBoardRow = memo((props: Props) => {
 	// Props
-	const { word, colorArr } = props;
+	const { word, colorArr, animating } = props;
 
 	// Component
 	return (

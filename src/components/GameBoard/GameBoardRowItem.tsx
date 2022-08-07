@@ -1,4 +1,5 @@
 import { Box } from '@mantine/core';
+import { motion } from 'framer-motion';
 import React, { memo } from 'react';
 
 type Props = {
@@ -40,7 +41,7 @@ const GameBoardItem = memo((props: Props) => {
 				backgroundColor: `${
 					{
 						correct: 'green',
-						wrong: 'hsla(111, 0%, 90%, 1)',
+						wrong: 'hsla(111, 0%, 50%, 1)',
 						present: 'orange',
 					}[status] || 'hsla(111, 0%, 77%, 1)'
 				}`,
