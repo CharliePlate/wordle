@@ -1,14 +1,15 @@
 import { Box } from '@mantine/core';
-import React from 'react';
+import React, { memo } from 'react';
 
 type Props = {
 	letter: string;
 	color: Color;
+	width: number;
 };
 
-const KeyboardKey = (props: Props) => {
+const KeyboardKey = memo((props: Props) => {
 	// Props
-	const { letter, color } = props;
+	const { letter, color, width } = props;
 
 	// Hooks
 	// Component
@@ -19,12 +20,18 @@ const KeyboardKey = (props: Props) => {
 				justifyContent: 'center',
 				alignItems: 'center',
 				padding: 0,
-				minWidth: `${
-					letter === 'ENTER' || letter === 'DELETE' ? '75px' : '30px'
-				}`,
-				maxWidth: '35px',
+				width: parseInt(
+					`${
+						['ENTER', 'DELETE'].includes(letter)
+							? width * 1.7
+							: width
+					}`
+				),
+				maxWidth: parseInt(
+					`${['ENTER', 'DELETE'].includes(letter) ? 100 : 45}`
+				),
 				borderRadius: '5px',
-				height: '45px',
+				height: '55px',
 				backgroundColor: `${
 					{
 						correct: 'green',
@@ -39,6 +46,6 @@ const KeyboardKey = (props: Props) => {
 			{letter}
 		</Box>
 	);
-};
+});
 
 export default KeyboardKey;

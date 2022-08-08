@@ -1,5 +1,4 @@
 import { Box } from '@mantine/core';
-import { motion } from 'framer-motion';
 import React, { memo } from 'react';
 
 type Props = {
@@ -21,8 +20,12 @@ const GameBoardItem = memo((props: Props) => {
 				justifyContent: 'center',
 				alignContent: 'center',
 				backgroundColor: 'hsla(111, 0%, 77%, 1)',
-				height: 75,
-				width: 75,
+				maxHeight: 75,
+				maxWidth: 75,
+				minHeight: 65,
+				minWidth: 65,
+				height: '17vw',
+				width: '17vw',
 				border: `${
 					status === 'typing' ? '5px dashed black' : '2px solid black'
 				}`,
@@ -48,8 +51,12 @@ const GameBoardItem = memo((props: Props) => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignContent: 'center',
-				height: 75,
-				width: 75,
+				maxHeight: 75,
+				maxWidth: 75,
+				minHeight: 65,
+				minWidth: 65,
+				height: '17vw',
+				width: '17vw',
 				border: '2px solid black',
 				borderRadius: '0',
 				fontSize: 50,

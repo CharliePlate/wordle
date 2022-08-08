@@ -1,5 +1,4 @@
 import { Box, Center, Group } from '@mantine/core';
-import { motion } from 'framer-motion';
 import React, { memo } from 'react';
 import GameBoardItem from './GameBoardRowItem';
 
@@ -16,7 +15,14 @@ const GameBoardRow = memo((props: Props) => {
 	// Component
 	return (
 		<Center>
-			<Group sx={{ padding: 1, gap: '2px' }}>
+			<Group
+				sx={{
+					padding: 1,
+					gap: '2px',
+					flexWrap: 'nowrap',
+					flexShrink: 1,
+				}}
+			>
 				{word.map((val, idx) => (
 					<GameBoardItem
 						status={colorArr[idx]}

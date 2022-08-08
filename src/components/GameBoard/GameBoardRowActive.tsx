@@ -3,7 +3,7 @@ import React from 'react';
 import useColCounter from '../../hooks/useCounter';
 import useKeyPress from '../../hooks/useKeyPress';
 import handleKeyPress from '../../lib/gameControls/handleKeyPress';
-import useStore from '../../lib/store';
+import { usePersistedGameStore } from '../../lib/stores/gameStore';
 import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
@@ -18,9 +18,10 @@ const GameBoardRowActive = (props: Props) => {
 	const { word, handleWord } = props;
 
 	// Hooks
-	const { row } = useStore();
+	const { row } = usePersistedGameStore();
 	const colCounter = useColCounter();
 	const { counter, setCounter } = colCounter;
+
 	useKeyPress(
 		[...availableLetters.split(''), 'Backspace', 'ArrowLeft', 'ArrowRight'],
 		(k) => {
@@ -32,7 +33,7 @@ const GameBoardRowActive = (props: Props) => {
 	// Component
 	return (
 		<Center>
-			<Group sx={{ padding: 1, gap: '2px' }}>
+			<Group sx={{ padding: 1, gap: '2px', flexWrap: 'nowrap' }}>
 				{word.map((val, idx) => (
 					<GameBoardItem
 						status={counter === idx ? 'typing' : 'undef'}
