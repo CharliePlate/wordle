@@ -1,14 +1,12 @@
-import { Box } from '@mantine/core';
-import React, { useEffect, useRef, useState } from 'react';
-import useColorArray from '../../hooks/useColorArray';
+import { Box, Button } from '@mantine/core';
+import React from 'react';
 import useKeyPress from '../../hooks/useKeyPress';
-import useWordArray from '../../hooks/useWordArray';
+import { handleColorSubmit } from '../../lib/gameControls/handleWordSubmit';
 import isValidWord from '../../lib/gameControls/isValidWord';
 import {
 	useGameStore,
 	usePersistedGameStore,
 } from '../../lib/stores/gameStore';
-import { generateRandomWord } from '../../lib/words';
 import KeyBoard from '../Keyboard/KeyBoard';
 import GameBoardRow from './GameBoardRow';
 import GameBoardRowActive from './GameBoardRowActive';
@@ -18,14 +16,26 @@ type Props = {};
 const Gameboard = (props: Props) => {
 	// Props
 	// Hooks
-	const { solution, row, incrementRow } = usePersistedGameStore();
-	const { colorArr, updateColors, keyColorArr } = useColorArray();
-	const { arr, updateWord } = useWordArray();
+	const {
+		solution,
+		row,
+		incrementRow,
+		boardState,
+		colorState,
+		setColorState,
+		keyColors,
+		resetGame,
+	} = usePersistedGameStore();
+
+	const { resetCol } = useGameStore();
 
 	useKeyPress(['Enter'], (k) => {
-		const res = isValidWord(arr[row]);
+		const res = isValidWord(boardState[row]);
 		if (res === 'valid') {
-			updateColors(solution, arr[row], row);
+			setColorState(
+				handleColorSubmit(boardState[row], colorState, solution, row)
+			);
+			resetCol();
 			incrementRow();
 		}
 	});
@@ -33,18 +43,26 @@ const Gameboard = (props: Props) => {
 	// Component
 	return (
 		<Box sx={{ marginTop: '5vh' }}>
-			{arr.map((x, idx) =>
+			{boardState.map((x, idx) =>
 				idx === row ? (
-					<GameBoardRowActive
-						handleWord={updateWord}
+					<GameBoardRowActive word={x} key={idx} />
+				) : (
+					<GameBoardRow
+						colorArr={colorState[idx]}
 						word={x}
 						key={idx}
 					/>
-				) : (
-					<GameBoardRow colorArr={colorArr[idx]} word={x} key={idx} />
 				)
 			)}
-			<KeyBoard keyColors={keyColorArr} />
+			<KeyBoard keyColors={keyColors} />
+			<Button
+				onClick={() => {
+					resetGame();
+					resetCol();
+				}}
+			>
+				New Game
+			</Button>
 		</Box>
 	);
 };

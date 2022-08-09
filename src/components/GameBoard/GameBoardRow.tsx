@@ -5,12 +5,11 @@ import GameBoardItem from './GameBoardRowItem';
 type Props = {
 	word: string[];
 	colorArr: string[];
-	animating?: boolean;
 };
 
 const GameBoardRow = memo((props: Props) => {
 	// Props
-	const { word, colorArr, animating } = props;
+	const { word, colorArr } = props;
 
 	// Component
 	return (

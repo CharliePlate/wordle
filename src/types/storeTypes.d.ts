@@ -21,8 +21,24 @@ interface GameState {
 
 interface PersistedGameStore {
 	solution: string;
-	setSolution: (genSolution: string) => void;
 
 	row: number;
 	incrementRow: VoidFunction;
+
+	boardState: string[][];
+	setBoardState: (boardState: string[][]) => void;
+	resetBoard: VoidFunction;
+
+	colorState: Color[][];
+	setColorState: (colorState: Color[][]) => void;
+
+	keyColors: KeyColor;
+	setKeyColors: (keyColors: KeyColor) => void;
+	resetGame: VoidFunction;
+}
+
+interface ColumnStateHandler {
+	col: number;
+	incrementCol: VoidFunction;
+	decrementCol: VoidFunction;
 }

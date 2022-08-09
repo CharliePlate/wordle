@@ -15291,7 +15291,7 @@ const allWords: Set<string> = new Set([
 
 const generateRandomWord = (): string => {
 	const array: string[] = Array.from(ansArr);
-	return array[Math.floor(Math.random() * array.length)];
+	return array[Math.floor(Math.random() * array.length)].toUpperCase();
 };
 
 export { allWords, ansArr, generateRandomWord };

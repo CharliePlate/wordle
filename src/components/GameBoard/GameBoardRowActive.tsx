@@ -1,32 +1,40 @@
 import { Box, Center, Group } from '@mantine/core';
 import React from 'react';
-import useColCounter from '../../hooks/useCounter';
 import useKeyPress from '../../hooks/useKeyPress';
-import handleKeyPress from '../../lib/gameControls/handleKeyPress';
-import { usePersistedGameStore } from '../../lib/stores/gameStore';
+import {
+	handleKeyPressCol,
+	handleKeyPressLetter,
+} from '../../lib/gameControls/handleKeyPress';
+import {
+	useGameStore,
+	usePersistedGameStore,
+} from '../../lib/stores/gameStore';
 import GameBoardItem from './GameBoardRowItem';
 
 type Props = {
 	word: string[];
-	handleWord: (rowNum: number, position: number, val: string) => void;
 };
 
 const availableLetters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const GameBoardRowActive = (props: Props) => {
 	// Props
-	const { word, handleWord } = props;
+	const { word } = props;
 
 	// Hooks
-	const { row } = usePersistedGameStore();
-	const colCounter = useColCounter();
-	const { counter, setCounter } = colCounter;
+
+	const { col, setCol, incrementCol, decrementCol } = useGameStore();
+	const { setBoardState, boardState, row } = usePersistedGameStore();
 
 	useKeyPress(
 		[...availableLetters.split(''), 'Backspace', 'ArrowLeft', 'ArrowRight'],
 		(k) => {
-			handleKeyPress(colCounter, k, word);
-			handleWord(row, counter, k);
+			setBoardState(handleKeyPressLetter(boardState, k, row, col));
+			handleKeyPressCol(
+				{ col, incrementCol, decrementCol },
+				k,
+				boardState[row]
+			);
 		}
 	);
 
@@ -34,13 +42,13 @@ const GameBoardRowActive = (props: Props) => {
 	return (
 		<Center>
 			<Group sx={{ padding: 1, gap: '2px', flexWrap: 'nowrap' }}>
-				{word.map((val, idx) => (
+				{boardState[row].map((val, idx) => (
 					<GameBoardItem
-						status={counter === idx ? 'typing' : 'undef'}
+						status={col === idx ? 'typing' : 'undef'}
 						letter={val}
 						pos={idx}
 						key={idx}
-						onClick={setCounter}
+						onClick={setCol}
 					/>
 				))}
 			</Group>

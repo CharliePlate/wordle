@@ -1,38 +1,57 @@
-const handleKeyPress = (
-	colCounter: ColCounter,
+const handleKeyPressLetter = (
+	wordArr: string[][],
+	val: string,
+	row: number,
+	pos: number
+) => {
+	const newArr = [...wordArr];
+	if (val === 'Backspace') {
+		newArr[row][pos] = '';
+		return newArr;
+	}
+	if (val.length > 1) {
+		return newArr;
+	}
+	newArr[row][pos] = val.toUpperCase();
+	return newArr;
+};
+
+const handleKeyPressCol = (
+	columnStateHandler: ColumnStateHandler,
 	keyPress: string,
 	val: string[]
 ): void => {
-	const { counter, decrement, increment } = colCounter;
+	const { col, decrementCol, incrementCol } = columnStateHandler;
 	if (keyPress === 'ArrowLeft') {
-		if (counter === 0) {
+		if (col === 0) {
 			return;
 		} else {
-			decrement();
+			decrementCol();
 			return;
 		}
 	} else if (keyPress === 'ArrowRight') {
-		if (counter === 4) {
+		if (col === 4) {
 			return;
 		} else {
-			increment();
+			incrementCol();
 			return;
 		}
 	}
 	if (keyPress === 'Backspace') {
-		if (counter === 0 || val[counter] !== '') {
+		if (col === 0 || val[col] !== '') {
+			console.log(val);
 			return;
 		} else {
-			decrement();
+			decrementCol();
 			return;
 		}
 	} else {
-		if (counter === 4) {
+		if (col === 4) {
 			return;
 		} else {
-			increment();
+			incrementCol();
 		}
 	}
 };
 
-export default handleKeyPress;
+export { handleKeyPressCol, handleKeyPressLetter };
