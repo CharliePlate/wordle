@@ -18,20 +18,21 @@ type Props = {
 	letter: string;
 	color: Color;
 	width: number;
-	handleKeyPress: (letter: string) => void;
+	handleEnter: () => void;
 };
 
 const KeyboardKey = memo((props: Props) => {
 	// Props
 
-	const { letter, color, width, handleKeyPress } = props;
+	const { letter, color, width, handleEnter } = props;
 
 	// Hooks
 
 	const { boardState, row, setBoardState } = usePersistedGameStore();
+	const { col, incrementCol, decrementCol } = useGameStore();
 
 	// Component
-	console.log(letter);
+
 	return (
 		<Box
 			sx={{
@@ -63,7 +64,21 @@ const KeyboardKey = memo((props: Props) => {
 				userSelect: 'none',
 			}}
 			onClick={() => {
-				handleKeyPress(letter);
+				letter === 'ENTER'
+					? handleEnter()
+					: handleKeyPressCol(
+							{ col, incrementCol, decrementCol },
+							letter === 'DELETE' ? 'Backspace' : letter,
+							boardState[row]
+					  );
+				setBoardState(
+					handleKeyPressLetter(
+						boardState,
+						letter === 'DELETE' ? 'Backspace' : letter,
+						row,
+						col
+					)
+				);
 			}}
 		>
 			{letter}

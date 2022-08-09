@@ -14,33 +14,15 @@ import KeyboardKey from './KeyboardKey';
 
 type Props = {
 	keyColors: KeyColor;
-	// handleEnter: VoidFunction;
+	handleEnter: VoidFunction;
 };
 
 const KeyBoard = (props: Props) => {
 	// Props
-	const { keyColors } = props;
+	const { keyColors, handleEnter } = props;
 
 	// Hooks
 	const { width } = useViewportSize();
-	const { col, incrementCol, decrementCol, resetCol } = useGameStore();
-	const { boardState, setBoardState, row } = usePersistedGameStore();
-
-	const handleKeyPress = (letter: string) => {
-		handleKeyPressCol(
-			{ col, incrementCol, decrementCol },
-			letter === 'DELETE' ? 'Backspace' : letter,
-			boardState[row]
-		);
-		setBoardState(
-			handleKeyPressLetter(
-				boardState,
-				letter === 'DELETE' ? 'Backspace' : letter,
-				row,
-				col
-			)
-		);
-	};
 
 	// Component
 	return (
@@ -62,7 +44,7 @@ const KeyBoard = (props: Props) => {
 								color={keyColors[letter]}
 								letter={letter}
 								key={letter}
-								handleKeyPress={handleKeyPress}
+								handleEnter={handleEnter}
 							/>
 						))}
 					</Group>

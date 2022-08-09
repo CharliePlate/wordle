@@ -70,7 +70,7 @@ const Gameboard = (props: Props) => {
 					/>
 				)
 			)}
-			<KeyBoard keyColors={keyColors} />
+			<KeyBoard keyColors={keyColors} handleEnter={handleEnter} />
 
 			{(colorState.some((row) =>
 				row.every((color) => color === 'correct')
