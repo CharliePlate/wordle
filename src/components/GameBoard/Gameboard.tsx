@@ -55,14 +55,19 @@ const Gameboard = (props: Props) => {
 				)
 			)}
 			<KeyBoard keyColors={keyColors} />
-			<Button
-				onClick={() => {
-					resetGame();
-					resetCol();
-				}}
-			>
-				New Game
-			</Button>
+			{(colorState.some((row) =>
+				row.every((color) => color === 'correct')
+			) ||
+				row > 6) && (
+				<Button
+					onClick={() => {
+						resetGame();
+						resetCol();
+					}}
+				>
+					New Game
+				</Button>
+			)}
 		</Box>
 	);
 };

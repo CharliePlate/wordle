@@ -3,22 +3,13 @@ import { devtools, persist } from 'zustand/middleware';
 import { keyColor } from '../keyboard';
 import { generateRandomWord } from '../words';
 
-const emptyArr: String[] | Color[][] = [
-	['', '', '', '', ''],
-	['', '', '', '', ''],
-	['', '', '', '', ''],
-	['', '', '', '', ''],
-	['', '', '', '', ''],
-	['', '', '', '', ''],
-];
-
 const useGameStore = create<GameState>()(
 	devtools((set) => ({
 		col: 0,
-		resetCol: () => set((state) => ({ col: 0 })),
+		resetCol: () => set(() => ({ col: 0 })),
 		incrementCol: () => set((state) => ({ col: state.col + 1 })),
 		decrementCol: () => set((state) => ({ col: state.col - 1 })),
-		setCol: (col: number) => set((state) => ({ col: col })),
+		setCol: (col: number) => set(() => ({ col: col })),
 	}))
 );
 
@@ -31,11 +22,25 @@ const usePersistedGameStore = create<PersistedGameStore>()(
 				row: 0,
 				incrementRow: () => set((state) => ({ row: state.row + 1 })),
 
-				boardState: emptyArr,
+				boardState: [
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+				],
 				setBoardState: (boardState) =>
 					set(() => ({ boardState: boardState })),
 
-				colorState: emptyArr,
+				colorState: [
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+					['', '', '', '', ''],
+				],
 				setColorState: (colorState) =>
 					set(() => ({ colorState: colorState })),
 
@@ -44,16 +49,29 @@ const usePersistedGameStore = create<PersistedGameStore>()(
 					keyColors: keyColors,
 				}),
 
-				resetBoard: () => set(() => ({ boardState: [...emptyArr] })),
-
-				resetGame: () =>
-					set(() => ({
-						boardState: [...emptyArr],
-						colorState: [...emptyArr],
+				resetGame: () => {
+					return set((state) => ({
+						colorState: [
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+						],
+						boardState: [
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+							['', '', '', '', ''],
+						],
 						keyColors: keyColor,
 						row: 0,
 						solution: generateRandomWord(),
-					})),
+					}));
+				},
 			}),
 			{ name: 'game-state' }
 		)

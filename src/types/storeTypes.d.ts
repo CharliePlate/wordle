@@ -27,13 +27,13 @@ interface PersistedGameStore {
 
 	boardState: string[][];
 	setBoardState: (boardState: string[][]) => void;
-	resetBoard: VoidFunction;
 
 	colorState: Color[][];
 	setColorState: (colorState: Color[][]) => void;
 
 	keyColors: KeyColor;
 	setKeyColors: (keyColors: KeyColor) => void;
+
 	resetGame: VoidFunction;
 }
 

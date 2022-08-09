@@ -22,7 +22,6 @@ const handleKeyPressCol = (
 	val: string[]
 ): void => {
 	const { col, decrementCol, incrementCol } = columnStateHandler;
-	console.log(val);
 	if (keyPress === 'ArrowLeft') {
 		if (col === 0) {
 			return;
