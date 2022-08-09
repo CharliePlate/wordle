@@ -29,12 +29,12 @@ const GameBoardRowActive = (props: Props) => {
 	useKeyPress(
 		[...availableLetters.split(''), 'Backspace', 'ArrowLeft', 'ArrowRight'],
 		(k) => {
-			setBoardState(handleKeyPressLetter(boardState, k, row, col));
 			handleKeyPressCol(
 				{ col, incrementCol, decrementCol },
 				k,
 				boardState[row]
 			);
+			setBoardState(handleKeyPressLetter(boardState, k, row, col));
 		}
 	);
 
