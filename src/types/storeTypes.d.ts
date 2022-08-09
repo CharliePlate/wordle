@@ -34,6 +34,7 @@ interface PersistedGameStore {
 	keyColors: KeyColor;
 	setKeyColors: (keyColors: KeyColor) => void;
 
+	setColors: (colorState: Color[][], keyColors: KeyColor) => void;
 	resetGame: VoidFunction;
 }
 

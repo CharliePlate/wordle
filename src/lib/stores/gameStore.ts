@@ -49,8 +49,14 @@ const usePersistedGameStore = create<PersistedGameStore>()(
 					keyColors: keyColors,
 				}),
 
+				setColors: (colorState, keyColors) =>
+					set(() => ({
+						colorState: colorState,
+						keyColors: keyColors,
+					})),
+
 				resetGame: () => {
-					return set((state) => ({
+					return set(() => ({
 						colorState: [
 							['', '', '', '', ''],
 							['', '', '', '', ''],

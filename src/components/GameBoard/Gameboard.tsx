@@ -1,7 +1,10 @@
 import { Box, Button } from '@mantine/core';
-import React from 'react';
+import React, { useCallback } from 'react';
 import useKeyPress from '../../hooks/useKeyPress';
-import { handleColorSubmit } from '../../lib/gameControls/handleWordSubmit';
+import {
+	handleColorSubmit,
+	handleKeyColorSubmit,
+} from '../../lib/gameControls/handleWordSubmit';
 import isValidWord from '../../lib/gameControls/isValidWord';
 import {
 	useGameStore,
@@ -22,22 +25,35 @@ const Gameboard = (props: Props) => {
 		incrementRow,
 		boardState,
 		colorState,
-		setColorState,
+		setColors,
 		keyColors,
 		resetGame,
 	} = usePersistedGameStore();
 
 	const { resetCol } = useGameStore();
 
-	useKeyPress(['Enter'], (k) => {
+	const handleEnter = () => {
 		const res = isValidWord(boardState[row]);
 		if (res === 'valid') {
-			setColorState(
-				handleColorSubmit(boardState[row], colorState, solution, row)
+			const newColorState = handleColorSubmit(
+				boardState[row],
+				colorState,
+				solution,
+				row
 			);
+			const newKeyColors = handleKeyColorSubmit(
+				boardState[row],
+				newColorState[row],
+				keyColors
+			);
+			setColors(newColorState, newKeyColors);
 			resetCol();
 			incrementRow();
 		}
+	};
+
+	useKeyPress(['Enter'], (k) => {
+		handleEnter();
 	});
 
 	// Component
@@ -55,10 +71,11 @@ const Gameboard = (props: Props) => {
 				)
 			)}
 			<KeyBoard keyColors={keyColors} />
+
 			{(colorState.some((row) =>
 				row.every((color) => color === 'correct')
 			) ||
-				row > 6) && (
+				row > 5) && (
 				<Button
 					onClick={() => {
 						resetGame();

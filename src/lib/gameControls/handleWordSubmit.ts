@@ -30,9 +30,9 @@ const handleColorSubmit = (
 };
 
 const handleKeyColorSubmit = (
+	guess: string[],
 	colorArr: Color[],
-	keyColors: KeyColor,
-	guess: string[]
+	keyColors: KeyColor
 ) => {
 	const createKeyObject = (guess: string[], colorArr: Color[]) => {
 		const colorObj: KeyColor = {};
@@ -67,7 +67,6 @@ const handleKeyColorSubmit = (
 		}
 		newObj[key] = keysToUpdate[key];
 	});
-
 	return newObj;
 };
 

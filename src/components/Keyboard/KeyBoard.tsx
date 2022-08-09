@@ -1,11 +1,20 @@
 import { Center, Group, Stack } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
-import React from 'react';
+import React, { memo } from 'react';
+import {
+	handleKeyPressCol,
+	handleKeyPressLetter,
+} from '../../lib/gameControls/handleKeyPress';
 import { keyboardRows } from '../../lib/keyboard';
+import {
+	useGameStore,
+	usePersistedGameStore,
+} from '../../lib/stores/gameStore';
 import KeyboardKey from './KeyboardKey';
 
 type Props = {
 	keyColors: KeyColor;
+	// handleEnter: VoidFunction;
 };
 
 const KeyBoard = (props: Props) => {
@@ -13,7 +22,25 @@ const KeyBoard = (props: Props) => {
 	const { keyColors } = props;
 
 	// Hooks
-	const { height, width } = useViewportSize();
+	const { width } = useViewportSize();
+	const { col, incrementCol, decrementCol, resetCol } = useGameStore();
+	const { boardState, setBoardState, row } = usePersistedGameStore();
+
+	const handleKeyPress = (letter: string) => {
+		handleKeyPressCol(
+			{ col, incrementCol, decrementCol },
+			letter === 'DELETE' ? 'Backspace' : letter,
+			boardState[row]
+		);
+		setBoardState(
+			handleKeyPressLetter(
+				boardState,
+				letter === 'DELETE' ? 'Backspace' : letter,
+				row,
+				col
+			)
+		);
+	};
 
 	// Component
 	return (
@@ -35,6 +62,7 @@ const KeyBoard = (props: Props) => {
 								color={keyColors[letter]}
 								letter={letter}
 								key={letter}
+								handleKeyPress={handleKeyPress}
 							/>
 						))}
 					</Group>

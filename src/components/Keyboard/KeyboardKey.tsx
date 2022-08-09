@@ -1,18 +1,37 @@
 import { Box } from '@mantine/core';
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import {
+	handleKeyPressCol,
+	handleKeyPressLetter,
+} from '../../lib/gameControls/handleKeyPress';
+import {
+	handleColorSubmit,
+	handleKeyColorSubmit,
+} from '../../lib/gameControls/handleWordSubmit';
+import isValidWord from '../../lib/gameControls/isValidWord';
+import {
+	useGameStore,
+	usePersistedGameStore,
+} from '../../lib/stores/gameStore';
 
 type Props = {
 	letter: string;
 	color: Color;
 	width: number;
+	handleKeyPress: (letter: string) => void;
 };
 
 const KeyboardKey = memo((props: Props) => {
 	// Props
-	const { letter, color, width } = props;
+
+	const { letter, color, width, handleKeyPress } = props;
 
 	// Hooks
+
+	const { boardState, row, setBoardState } = usePersistedGameStore();
+
 	// Component
+	console.log(letter);
 	return (
 		<Box
 			sx={{
@@ -41,6 +60,10 @@ const KeyboardKey = memo((props: Props) => {
 					}[color]
 				}`,
 				color: 'black',
+				userSelect: 'none',
+			}}
+			onClick={() => {
+				handleKeyPress(letter);
 			}}
 		>
 			{letter}
