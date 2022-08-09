@@ -21,7 +21,7 @@ type Props = {
 	handleEnter: () => void;
 };
 
-const KeyboardKey = memo((props: Props) => {
+const KeyboardKey = (props: Props) => {
 	// Props
 
 	const { letter, color, width, handleEnter } = props;
@@ -32,7 +32,6 @@ const KeyboardKey = memo((props: Props) => {
 	const { col, incrementCol, decrementCol } = useGameStore();
 
 	// Component
-
 	return (
 		<Box
 			sx={{
@@ -84,6 +83,6 @@ const KeyboardKey = memo((props: Props) => {
 			{letter}
 		</Box>
 	);
-});
+};
 
-export default KeyboardKey;
+export default memo(KeyboardKey);

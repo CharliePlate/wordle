@@ -32,7 +32,7 @@ const Gameboard = (props: Props) => {
 
 	const { resetCol } = useGameStore();
 
-	const handleEnter = () => {
+	const handleEnter = useCallback(() => {
 		const res = isValidWord(boardState[row]);
 		if (res === 'valid') {
 			const newColorState = handleColorSubmit(
@@ -41,6 +41,7 @@ const Gameboard = (props: Props) => {
 				solution,
 				row
 			);
+			console.log(row, newColorState);
 			const newKeyColors = handleKeyColorSubmit(
 				boardState[row],
 				newColorState[row],
@@ -50,12 +51,11 @@ const Gameboard = (props: Props) => {
 			resetCol();
 			incrementRow();
 		}
-	};
+	}, [row]);
 
 	useKeyPress(['Enter'], (k) => {
 		handleEnter();
 	});
-
 	// Component
 	return (
 		<Box sx={{ marginTop: '5vh' }}>

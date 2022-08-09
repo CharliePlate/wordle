@@ -1,4 +1,4 @@
-import { Box, Center, Group } from '@mantine/core';
+import { Center, Group } from '@mantine/core';
 import React, { memo } from 'react';
 import GameBoardItem from './GameBoardRowItem';
 

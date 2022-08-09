@@ -54,4 +54,4 @@ const KeyBoard = (props: Props) => {
 	);
 };
 
-export default KeyBoard;
+export default memo(KeyBoard);
