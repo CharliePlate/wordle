@@ -36,8 +36,7 @@ const handleKeyPressCol = (
 			incrementCol();
 			return;
 		}
-	}
-	if (keyPress === 'Backspace') {
+	} else if (keyPress === 'Backspace') {
 		if (col === 0 || val[col] !== '') {
 			return;
 		} else {

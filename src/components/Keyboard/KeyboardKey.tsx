@@ -23,11 +23,9 @@ type Props = {
 
 const KeyboardKey = (props: Props) => {
 	// Props
-
 	const { letter, color, width, handleEnter } = props;
 
 	// Hooks
-
 	const { boardState, row, setBoardState } = usePersistedGameStore();
 	const { col, incrementCol, decrementCol } = useGameStore();
 

@@ -82,7 +82,7 @@ const Gameboard = (props: Props) => {
 						resetCol();
 					}}
 				>
-					New Game
+					{solution}
 				</Button>
 			)}
 		</Box>
