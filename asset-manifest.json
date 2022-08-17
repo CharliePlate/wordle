@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/wordle/static/js/main.b62c4a43.js",
+    "main.js": "/wordle/static/js/main.b65bc488.js",
     "index.html": "/wordle/index.html",
-    "main.b62c4a43.js.map": "/wordle/static/js/main.b62c4a43.js.map"
+    "main.b65bc488.js.map": "/wordle/static/js/main.b65bc488.js.map"
   },
   "entrypoints": [
-    "static/js/main.b62c4a43.js"
+    "static/js/main.b65bc488.js"
   ]
 }
