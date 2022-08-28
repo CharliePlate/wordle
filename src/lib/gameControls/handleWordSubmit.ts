@@ -40,10 +40,7 @@ const handleKeyColorSubmit = (
 			if (colorObj[key]) {
 				if (colorObj[key] === 'correct') {
 					return;
-				} else if (
-					colorObj[key] === 'present' &&
-					guess[idx] !== 'correct'
-				) {
+				} else if (colorObj[key] === 'present' && guess[idx] !== 'correct') {
 					return;
 				} else {
 					colorObj[key] = colorArr[idx];
